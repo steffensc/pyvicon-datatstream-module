@@ -6,7 +6,7 @@ class ObjectTracker:
     
         self.is_connected = False
 
-        self.vicon_client = pv.PyVicon()
+        self.vicon_client = pv.PyViconDatastream()
         self.connect()
 
         if self.is_connected == True:
