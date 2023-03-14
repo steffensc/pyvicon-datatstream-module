@@ -1,4 +1,4 @@
-import pyvicon as pv
+import pyvicon_datastream as pv
 
 class ObjectTracker:
     def __init__(self, ip):
