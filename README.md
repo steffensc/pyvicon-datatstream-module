@@ -2,7 +2,9 @@
 This module provides a platform independent minimal python 3 wrapper implementation over Vicon Datastream SDK.
 
 **IMPORTATNT NOTICE:**
-This module is currently still in development. So far I only managed to run and compile it on an M1 ARM MacBook Pro.
+This module is currently still in development. So far I only managed to run and compile it on
+- M1 ARM MacBook Pro
+- Ubuntu 20 x86
 
 The python interface currently provided by Vicon itself (see https://docs.vicon.com/display/DSSDK111/Vicon+DataStream+SDK+Quick+Start+Guide+for+Python) only runs on Windows. Other solutions I found like the one from MathGaron https://github.com/MathGaron/pyvicon were only runnable on x86 and implied that you have to download a precompiled version (also there is currently no version available for ARM) of the library from the Vicon website and place it manually in your module.
 So I created this module which ships with the nescessary library sources and automatically compiles them on installation.
