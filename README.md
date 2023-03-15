@@ -56,7 +56,7 @@ while(True):
 ### PyVicon (wrapper implementation)
 Files `pyvicon_datastream/pyvicon_datastream_wrapper.cpp` and `pyvicon_datastream/pyvicon_datastream.py` are from the project: https://github.com/MathGaron/pyvicon, a minimal python 3 wrapper implementation for the Vicon Datastream SDK.
 
-License information see `pyvicon_datastream/LICENSE_PVICON_WRAPPER`
+License information see `pyvicon_datastream/LICENSE_PVICON_DATASTREAM`
 
 
 ### Vicon Datastream SDK
