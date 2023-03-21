@@ -2,7 +2,7 @@ from skbuild import setup  # This line replaces 'from setuptools import setup'
 
 setup(
     name="pyvicon_datastream",
-    version="0.1",
+    version="0.1.1",
     description="Platform independent minimal python 3 wrapper implementation over Vicon Datastream SDK",
     author="Steffen Schmelter",
     packages=["pyvicon_datastream"],
