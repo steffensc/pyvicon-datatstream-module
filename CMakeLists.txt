@@ -64,12 +64,16 @@ target_include_directories(ViconDataStreamSDK_CPP PUBLIC
   $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
 )
 
-target_link_libraries(ViconDataStreamSDK_CPP PUBLIC
-  Boost::system
-  Boost::thread
-  Boost::timer
-  pthread
-)
+# Addd Boost Lib Sources
+include(${PROJECT_SOURCE_DIR}/lib_src/boost/system/CMakeLists.txt)
+
+
+#target_link_libraries(ViconDataStreamSDK_CPP PUBLIC
+#  Boost::system
+#  Boost::thread
+#  Boost::timer
+#  pthread
+#)
 
 # All users of this library will need at least C++14
 #target_compile_features(ViconDataStreamSDK_CPP PUBLIC cxx_std_14)
