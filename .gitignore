@@ -51,6 +51,7 @@ __pycache__/
 
 # Distribution / packaging
 .Python
+MANIFEST.in
 build/
 develop-eggs/
 dist/
