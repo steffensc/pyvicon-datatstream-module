@@ -3,10 +3,10 @@ from skbuild import setup  # This line replaces 'from setuptools import setup'
 setup(
     name="pyvicon_datastream",
     version="0.1",
-    description="",
+    description="Platform independent minimal python 3 wrapper implementation over Vicon Datastream SDK",
     author="Steffen Schmelter",
     packages=["pyvicon_datastream"],
-    #cmake_install_dir='src/hellosdfsdf',
+    url = 'https://github.com/steffensc/pyvicon-datatstream-module',
     install_requires=["numpy>=1.21"],
     python_requires=">=3.7",
 )
