@@ -26,7 +26,7 @@ For more information and output during install set the verbose flag: `-v`
 
 `pip install pyvicon-datastream-module/. -v`
 
-…somehow it's important to run the command from outside the main directory of the project
+...somehow it's important to run the command from outside the main directory of the project (propably due to a naming conflict since inside the pyvicon-datastream-module folder there is (already) a folder called "pyvcion_datastream").
 
 
 
@@ -80,7 +80,7 @@ You can find the latest official version at https://vicon.com/downloads/utilitie
 
 
 ## To Do's:
-- Test on other Platforms: Windows, RaspBerry Pi …
+- Test on other Platforms: Windows, RaspBerry Pi ...
 - Clean up Makefile
 - Add examples
 - Check if another source for downloading the Vicon Datastream SDK sources is available
