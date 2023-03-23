@@ -85,6 +85,7 @@ You can find the latest official version at https://vicon.com/downloads/utilitie
 
 
 ## To Do's:
+- BUILD FAILS on Windows: Warning of coming close to the "maximum full path to an object file is 250"
 - Test on other Platforms: Windows, RaspBerry Pi ...
 - Clean up Makefile
 - Add examples
