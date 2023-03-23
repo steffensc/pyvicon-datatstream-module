@@ -16,4 +16,5 @@ setup(
     install_requires=["numpy>=1.21"],
     python_requires=">=3.7",
     long_description=Path("README.md").read_text(encoding="utf-8"),
+    long_description_content_type="text/markdown",
 )
