@@ -6,6 +6,12 @@ project(pyvicon_datastream_wrapper
 
 set (CMAKE_CXX_STANDARD 14)
 
+
+# Add Boost Lib Sources
+set(BOOST_INCLUDE_LIBRARIES system;thread,timer)
+include(${PROJECT_SOURCE_DIR}/lib_src/boost/CMakeLists.txt)
+
+
 find_package(Boost 1.5 COMPONENTS system thread timer REQUIRED)
 find_package(PythonExtensions REQUIRED)
 
@@ -64,8 +70,7 @@ target_include_directories(ViconDataStreamSDK_CPP PUBLIC
   $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
 )
 
-# Addd Boost Lib Sources
-include(${PROJECT_SOURCE_DIR}/lib_src/boost/system/CMakeLists.txt)
+
 
 
 #target_link_libraries(ViconDataStreamSDK_CPP PUBLIC
