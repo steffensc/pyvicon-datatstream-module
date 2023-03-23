@@ -12,24 +12,6 @@ The python interface currently provided by Vicon itself (see https://docs.vicon.
 So I created this module which ships with all the nescessary library sources and automatically compiles them on installation!
 
 
-## Build / Install the Module
-
-### The module ist available on PyPI!
-`pip install pyvicon-datastream`
-
-https://pypi.org/project/pyvicon-datastream/
-
-### Local installation with sources
-`pip install pyvicon-datastream-module/.`
-
-For more information and output during install set the verbose flag: `-v`
-
-`pip install pyvicon-datastream-module/. -v`
-
-...somehow it's important to run the command from outside the main directory of the project (propably due to a naming conflict since inside the pyvicon-datastream-module folder there is (already) a folder called "pyvcion_datastream").
-
-
-
 
 ## Usage
 ### pyvicon_datastream
@@ -62,6 +44,29 @@ while(True):
     time.sleep(0.5)
 ```
 
+
+## Build / Install the Module
+
+### The module ist available on PyPI!
+`pip install pyvicon-datastream`
+
+https://pypi.org/project/pyvicon-datastream/
+
+### Local installation with sources
+`pip install pyvicon-datastream-module/.`
+
+For more information and output during install set the verbose flag: `-v`
+
+`pip install pyvicon-datastream-module/. -v`
+
+...somehow it's important to run the command from outside the main directory of the project (propably due to a naming conflict since inside the pyvicon-datastream-module folder there is (already) a folder called "pyvcion_datastream").
+
+### Build / check
+```
+cd pyvicon-datastream-module
+python -m build --sdist
+twine check dist/*
+```
 
 ## License Information
 ### PyVicon (wrapper implementation)
