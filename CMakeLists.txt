@@ -20,6 +20,7 @@ set(BOOST_ENABLE_CMAKE ON)
 # Download and Extract the Boost Library from GitHub
 message(STATUS "Downloading and extracting Boost Library Sources. This will take some time...")
 include(FetchContent)
+Set(FETCHCONTENT_QUIET FALSE)
 FetchContent_Declare(
     Boost
     URL https://github.com/boostorg/boost/releases/download/boost-1.81.0/boost-1.81.0.7z

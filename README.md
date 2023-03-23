@@ -85,4 +85,3 @@ You can find the latest official version at https://vicon.com/downloads/utilitie
 - Add examples
 - Check if another source for downloading the Vicon Datastream SDK sources is available
 - Fix the "DOWNLOAD_EXTRACT_TIMESTAMP" warnig / error message thrown by Cmake when fetching the boost lib sources zip from GitHub
-- Printing progress in terminal when fetching the boost lib sources zip from GitHub via cmake
