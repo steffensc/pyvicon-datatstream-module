@@ -1,5 +1,5 @@
 # pyvicon-datastream-module
-This module provides a platform independent minimal python 3 wrapper implementation over Vicon Datastream SDK.
+This module provides a **platform independent** python 3 wrapper implementation over the Vicon Datastream SDK.
 
 **IMPORTATNT NOTICE:**
 This module is currently still in development. So far I only managed to run and compile it on:
@@ -9,10 +9,17 @@ This module is currently still in development. So far I only managed to run and 
 
 ### Background information
 The python interface currently provided by Vicon itself (see https://docs.vicon.com/display/DSSDK111/Vicon+DataStream+SDK+Quick+Start+Guide+for+Python) only runs on Windows. Other solutions I found like the one from MathGaron https://github.com/MathGaron/pyvicon were only runnable on x86 and implied that you have to download a precompiled version (also there is currently no version available for ARM) of the library from the Vicon website and place it manually in your module.
-So I created this module which ships with the nescessary library sources and automatically compiles them on installation.
+So I created this module which ships with all the nescessary library sources and automatically compiles them on installation!
 
 
 ## Build / Install the Module
+
+### The module ist available on PyPI!
+`pip install pyvicon-datastream`
+
+https://pypi.org/project/pyvicon-datastream/
+
+### Local installation with sources
 `pip install pyvicon-datastream-module/.`
 
 For more information and output during install set the verbose flag: `-v`
@@ -20,6 +27,8 @@ For more information and output during install set the verbose flag: `-v`
 `pip install pyvicon-datastream-module/. -v`
 
 …somehow it's important to run the command from outside the main directory of the project
+
+
 
 
 ## Usage
@@ -69,18 +78,11 @@ Download Vicon Datastream SDK sources: https://github.com/whoenig/vicon-datastre
 You can find the latest official version at https://vicon.com/downloads/utilities-and-sdk/datastream-sdk
 
 
-### Boost
-Installing Boost Lib
-- MacOS:
-  - If not present install *homebrew* on MacOS (https://brew.sh)
-  - `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
-  - `brew install boost`
 
-- Linux:
-
-- Windows:
-
-TODO: Ship Boost sources with package, so installation of libs is not necessary
-- https://github.com/boostorg/system
-- https://github.com/boostorg/thread
-- https://github.com/boostorg/timer
+## To Do's:
+- Test on other Platforms: Windows, RaspBerry Pi …
+- Clean up Makefile
+- Add examples
+- Check if another source for downloading the Vicon Datastream SDK sources is available
+- Fix the "DOWNLOAD_EXTRACT_TIMESTAMP" warnig / error message thrown by Cmake when fetching the boost lib sources zip from GitHub
+- Printing progress in terminal when fetching the boost lib sources zip from GitHub via cmake
