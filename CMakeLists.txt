@@ -1,5 +1,11 @@
 cmake_minimum_required(VERSION 3.5)
 
+################################
+function(PRINT_VAR VARNAME)
+  message(STATUS "${VARNAME}: ${${VARNAME}}")
+endfunction()
+################################
+
 project(pyvicon_datastream_wrapper
         VERSION "0.1"
 )
@@ -8,21 +14,26 @@ set (CMAKE_CXX_STANDARD 14)
 
 
 # Add Boost Lib Sources
-set(BOOST_INCLUDE_LIBRARIES system;thread,timer)
-include(${PROJECT_SOURCE_DIR}/lib_src/boost/CMakeLists.txt)
+set(BOOST_INCLUDE_LIBRARIES asio system thread timer)
+set(BOOST_ENABLE_CMAKE ON)
+
+# Download and Extract the Boost Library from GitHub
+message(STATUS "Downloading and extracting Boost Library Sources. This will take some time...")
+include(FetchContent)
+FetchContent_Declare(
+    Boost
+    URL https://github.com/boostorg/boost/releases/download/boost-1.81.0/boost-1.81.0.7z
+    USES_TERMINAL_DOWNLOAD TRUE
+    GIT_PROGRESS TRUE
+    DOWNLOAD_NO_EXTRACT FALSE
+)
+FetchContent_MakeAvailable(Boost)
 
 
-find_package(Boost 1.5 COMPONENTS system thread timer REQUIRED)
+#find_package(Boost 1.5 COMPONENTS system thread timer REQUIRED)
 find_package(PythonExtensions REQUIRED)
 
 include(GNUInstallDirs)
-
-
-################################
-function(PRINT_VAR VARNAME)
-  message(STATUS "${VARNAME}: ${${VARNAME}}")
-endfunction()
-################################
 
 
 #set(default_build_type "Release")
@@ -70,15 +81,22 @@ target_include_directories(ViconDataStreamSDK_CPP PUBLIC
   $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
 )
 
+# Boost Header Libraries
+target_include_directories(ViconDataStreamSDK_CPP PRIVATE
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/_deps/boost-src/libs/asio/include>
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/_deps/boost-src/libs/align/include>
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/_deps/boost-src/libs/math/include>
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/_deps/boost-src/libs/format/include>
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/_deps/boost-src/libs/filesystem/include>
+)
 
 
-
-#target_link_libraries(ViconDataStreamSDK_CPP PUBLIC
-#  Boost::system
-#  Boost::thread
-#  Boost::timer
-#  pthread
-#)
+target_link_libraries(ViconDataStreamSDK_CPP PRIVATE
+  Boost::system
+  Boost::thread
+  Boost::timer
+  pthread
+)
 
 # All users of this library will need at least C++14
 #target_compile_features(ViconDataStreamSDK_CPP PUBLIC cxx_std_14)
@@ -188,10 +206,16 @@ endif()
 
 
 PRINT_VAR("APPLE")
+PRINT_VAR("SKBUILD_DIR")
 PRINT_VAR("PROJECT_SOURCE_DIR")
 PRINT_VAR("CMAKE_INSTALL_INCLUDEDIR")
 PRINT_VAR("CMAKE_INSTALL_LIBDIR")
 PRINT_VAR("PYVICON_CMAKE_PACKAGE_INSTALL_SUBDIR")
+
+
+PRINT_VAR("CMAKE_CURRENT_BINARY_DIR")
+PRINT_VAR("CMAKE_SOURCE_DIR")
+
 
 #python_extension_module(_pyvicon_datastream_wrapper)
 #install(TARGETS _pyvicon_datastream_wrapper LIBRARY DESTINATION pyvicon)
