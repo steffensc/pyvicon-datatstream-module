@@ -34,7 +34,7 @@ else:
     print(f"Connection to {VICON_TRACKER_IP} successful")
 ```
 
-### ObjectTracker
+### Tools / ObjectTracker
 ```
 from pyvicon_datastream import tools
 
@@ -89,6 +89,7 @@ You can find the latest official version at https://vicon.com/downloads/utilitie
 
 
 ## To Do's:
+- v0.2.1 ISSUE: BUILD FAILS on Windows and UBUNTU!!!! Probably due to error when linking the compiled boost lib with the vicon datastream sdk library.
 - BUILD FAILS on Windows: Warning of coming close to the "maximum full path to an object file is 250"
 - Test on other Platforms: Windows, RaspBerry Pi ...
 - Clean up Makefile
