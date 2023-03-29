@@ -7,7 +7,8 @@ This module provides a **platform independent** python 3 wrapper implementation 
 
 **IMPORTATNT NOTICE:**
 This module is currently still in development. So far I only managed to run and compile it on:
-- **ARM**: M1 ARM MacBook Pro with macOS Ventura 13.2.1
+- **ARM**: M1 MacBook Pro with macOS Ventura 13.2.1
+- **ARM**: M1-Pro MacBook Pro with macOS Ventura 13.2.1
 - **ARM**: RaspBerry Pi 4 (4 GB) with Ubuntu 22
 - **x86**: some Laptop with Ubuntu 20
 
