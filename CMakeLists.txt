@@ -1,17 +1,23 @@
 cmake_minimum_required(VERSION 3.5)
 
+project(pyvicon_datastream_wrapper
+        VERSION "0.2"
+)
+
+set(CMAKE_CXX_STANDARD 14)
+
+include(GNUInstallDirs)
+
+
 ################################
 function(PRINT_VAR VARNAME)
   message(STATUS "${VARNAME}: ${${VARNAME}}")
 endfunction()
 ################################
 
-project(pyvicon_datastream_wrapper
-        VERSION "0.1"
-)
-
-set (CMAKE_CXX_STANDARD 14)
-
+# Set -fPIC beacrause of shared library -> ERROR:  relocation [*Architecture Name*] against symbol `[*some cryptic code*]' which may bind externally can not be used when making a shared object; recompile with -fPIC
+#set_target_properties(ViconDataStreamSDK_CPP PROPERTIES COMPILE_FLAGS -fPIC)
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 # Add Boost Lib Sources
 set(BOOST_INCLUDE_LIBRARIES asio system thread timer)
@@ -31,10 +37,7 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(Boost)
 
 
-#find_package(Boost 1.5 COMPONENTS system thread timer REQUIRED)
 find_package(PythonExtensions REQUIRED)
-
-include(GNUInstallDirs)
 
 
 #set(default_build_type "Release")
@@ -91,7 +94,6 @@ target_include_directories(ViconDataStreamSDK_CPP PRIVATE
   $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/_deps/boost-src/libs/filesystem/include>
 )
 
-
 target_link_libraries(ViconDataStreamSDK_CPP PRIVATE
   Boost::system
   Boost::thread
@@ -99,9 +101,17 @@ target_link_libraries(ViconDataStreamSDK_CPP PRIVATE
   pthread
 )
 
-# All users of this library will need at least C++14
-#target_compile_features(ViconDataStreamSDK_CPP PUBLIC cxx_std_14)
-#target_compile_options(ViconDataStreamSDK_CPP PRIVATE -Wno-unknown-pragmas -Wno-unused-function -Wno-unused-but-set-variable)
+
+
+
+
+### # All users of this library will need at least C++14
+### target_compile_features(ViconDataStreamSDK_CPP PRIVATE cxx_std_14)
+### target_compile_options(ViconDataStreamSDK_CPP PRIVATE -Wno-unknown-pragmas -Wno-unused-function -Wno-unused-but-set-variable)
+### 
+### # Set -fPIC
+### set_property(TARGET ViconDataStreamSDK_CPP PROPERTY POSITION_INDEPENDENT_CODE ON)
+
 
 
 # Standard installation subdirs for the C++ library are used. The files will end
@@ -179,6 +189,7 @@ if(DEFINED SKBUILD)
     ViconDataStreamSDK_CPP
   )
 
+
   python_extension_module(_pyvicon_datastream_wrapper)
 
 
@@ -208,6 +219,7 @@ endif()
 
 PRINT_VAR("APPLE")
 PRINT_VAR("SKBUILD_DIR")
+PRINT_VAR("PROJECT_BINARY_DIR")
 PRINT_VAR("PROJECT_SOURCE_DIR")
 PRINT_VAR("CMAKE_INSTALL_INCLUDEDIR")
 PRINT_VAR("CMAKE_INSTALL_LIBDIR")
