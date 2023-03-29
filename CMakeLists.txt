@@ -13,7 +13,24 @@ include(GNUInstallDirs)
 function(PRINT_VAR VARNAME)
   message(STATUS "${VARNAME}: ${${VARNAME}}")
 endfunction()
+
+macro(get_win_hex outvar)
+  string(REGEX MATCH "^([0-9]+)\\.([0-9]+)" ${outvar} ${CMAKE_SYSTEM_VERSION})
+  math(EXPR ${outvar} "(${CMAKE_MATCH_1} << 8) + ${CMAKE_MATCH_2}" OUTPUT_FORMAT HEXADECIMAL)
+endmacro()
 ################################
+
+
+if(WIN32)
+  get_win_hex(winver)
+  add_compile_definitions(_WIN32_WINNT=${winver})
+
+  # Escaping Spaces / White Space in widows paths
+  set(PROJECT_BINARY_DIR "\"$(PROJECT_BINARY_DIR)\"")
+  set(PROJECT_SOURCE_DIR "\"$(PROJECT_SOURCE_DIR)\"")
+  set(CMAKE_CURRENT_BINARY_DIR "\"$(CMAKE_CURRENT_BINARY_DIR)\"")
+  set(CMAKE_SOURCE_DIR "\"$(CMAKE_SOURCE_DIR)\"")
+endif()
 
 # Set -fPIC beacrause of shared library -> ERROR:  relocation [*Architecture Name*] against symbol `[*some cryptic code*]' which may bind externally can not be used when making a shared object; recompile with -fPIC
 #set_target_properties(ViconDataStreamSDK_CPP PROPERTIES COMPILE_FLAGS -fPIC)
@@ -217,6 +234,7 @@ if(DEFINED SKBUILD)
 endif()
 
 
+PRINT_VAR("WIN32")
 PRINT_VAR("APPLE")
 PRINT_VAR("SKBUILD_DIR")
 PRINT_VAR("PROJECT_BINARY_DIR")
