@@ -51,6 +51,20 @@ while(True):
 
 ## Build / Install the Module
 
+### Common issues:
+You need a C and C++ compiler on your system!
+- **Ubuntu / Linux:** `sudo apt install gcc g++`
+- **MacOS:** install the XCode Developer Tools
+- **Windows:** Install the Visual Studio C++ Development Tools (you will find installation info in the error message)
+
+fatal error: Python.h: No such file or directory
+
+`sudo apt install python3-dev`
+
+
+
+
+
 ### The module ist available on PyPI!
 `pip install pyvicon-datastream`
 
