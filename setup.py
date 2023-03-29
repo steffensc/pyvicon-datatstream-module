@@ -4,7 +4,7 @@ from pathlib import Path
 
 setup(
     name="pyvicon_datastream",
-    version="0.2.1",
+    version="0.2.2",
     description="Platform independent Python3 wrapper for Vicon Datastream SDK",
     author="Steffen Schmelter",
     packages=["pyvicon_datastream"],
