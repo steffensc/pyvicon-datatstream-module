@@ -18,18 +18,25 @@ macro(get_win_hex outvar)
   string(REGEX MATCH "^([0-9]+)\\.([0-9]+)" ${outvar} ${CMAKE_SYSTEM_VERSION})
   math(EXPR ${outvar} "(${CMAKE_MATCH_1} << 8) + ${CMAKE_MATCH_2}" OUTPUT_FORMAT HEXADECIMAL)
 endmacro()
+
+execute_process( #Set PYTHON_SITE variable with module path in site-packages
+  COMMAND "${PYTHON_EXECUTABLE}" -c "if True:
+    from distutils import sysconfig as sc
+    print(sc.get_python_lib(prefix='', plat_specific=True))"
+  OUTPUT_VARIABLE PYTHON_SITE
+  OUTPUT_STRIP_TRAILING_WHITESPACE)
 ################################
 
+
+set(THREADS_PREFER_PTHREAD_FLAG ON)
+find_package(Threads REQUIRED)
 
 if(WIN32)
   get_win_hex(winver)
   add_compile_definitions(_WIN32_WINNT=${winver})
 
-  # Escaping Spaces / White Space in widows paths
-  set(PROJECT_BINARY_DIR "\"$(PROJECT_BINARY_DIR)\"")
-  set(PROJECT_SOURCE_DIR "\"$(PROJECT_SOURCE_DIR)\"")
-  set(CMAKE_CURRENT_BINARY_DIR "\"$(CMAKE_CURRENT_BINARY_DIR)\"")
-  set(CMAKE_SOURCE_DIR "\"$(CMAKE_SOURCE_DIR)\"")
+  #option(CMAKE_USE_WIN32_THREADS_INIT "using WIN32 threads" ON)
+  #option(gtest_disable_pthreads "Disable uses of pthreads in gtest." ON)
 endif()
 
 # Set -fPIC beacrause of shared library -> ERROR:  relocation [*Architecture Name*] against symbol `[*some cryptic code*]' which may bind externally can not be used when making a shared object; recompile with -fPIC
@@ -37,7 +44,7 @@ endif()
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 # Add Boost Lib Sources
-set(BOOST_INCLUDE_LIBRARIES asio system thread timer)
+set(BOOST_INCLUDE_LIBRARIES asio system thread filesystem)
 set(BOOST_ENABLE_CMAKE ON)
 
 # Download and Extract the Boost Library from GitHub
@@ -111,11 +118,12 @@ target_include_directories(ViconDataStreamSDK_CPP PRIVATE
   $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/_deps/boost-src/libs/filesystem/include>
 )
 
+
 target_link_libraries(ViconDataStreamSDK_CPP PRIVATE
   Boost::system
   Boost::thread
-  Boost::timer
-  pthread
+  Boost::filesystem
+  Threads::Threads
 )
 
 
@@ -137,11 +145,19 @@ target_link_libraries(ViconDataStreamSDK_CPP PRIVATE
 #
 # Installing the objects in the package provides encapsulation and will become
 # important later for binary redistribution reasons.
-install(
-  TARGETS ViconDataStreamSDK_CPP
-  EXPORT ViconDataStreamSDK_CPPTargets
-  LIBRARY DESTINATION pyvicon_datastream/${CMAKE_INSTALL_LIBDIR}
-)
+if(WIN32)
+  install(
+    TARGETS ViconDataStreamSDK_CPP
+    EXPORT ViconDataStreamSDK_CPPTargets
+    LIBRARY DESTINATION ${PYTHON_SITE}/pyvicon_datastream/${CMAKE_INSTALL_LIBDIR} # Windows needs prefix-path to the module folder insite site-packages otherwise lib files end up inthe root of the venv
+  )
+else()
+  #install(
+  #  TARGETS ViconDataStreamSDK_CPP
+  #  EXPORT ViconDataStreamSDK_CPPTargets
+  #  LIBRARY DESTINATION pyvicon_datastream/${CMAKE_INSTALL_LIBDIR}
+  #)
+endif()
 
 
 # The CMake package config and target files are installed under the Python
@@ -227,8 +243,7 @@ if(DEFINED SKBUILD)
     set_target_properties(
       _pyvicon_datastream_wrapper PROPERTIES INSTALL_RPATH "@loader_path/${CMAKE_INSTALL_LIBDIR}")
   else()
-    set_target_properties(_pyvicon_datastream_wrapper PROPERTIES INSTALL_RPATH
-                                            "$ORIGIN/${CMAKE_INSTALL_LIBDIR}")
+    set_target_properties(_pyvicon_datastream_wrapper PROPERTIES INSTALL_RPATH "$ORIGIN/${CMAKE_INSTALL_LIBDIR}")
   endif()
 
 endif()
@@ -236,13 +251,15 @@ endif()
 
 PRINT_VAR("WIN32")
 PRINT_VAR("APPLE")
+PRINT_VAR("PYTHON_SITE")
+PRINT_VAR("ORIGIN")
+PRINT_VAR("INSTALL_RPATH")
 PRINT_VAR("SKBUILD_DIR")
 PRINT_VAR("PROJECT_BINARY_DIR")
 PRINT_VAR("PROJECT_SOURCE_DIR")
 PRINT_VAR("CMAKE_INSTALL_INCLUDEDIR")
 PRINT_VAR("CMAKE_INSTALL_LIBDIR")
 PRINT_VAR("PYVICON_CMAKE_PACKAGE_INSTALL_SUBDIR")
-
 
 PRINT_VAR("CMAKE_CURRENT_BINARY_DIR")
 PRINT_VAR("CMAKE_SOURCE_DIR")
