@@ -102,7 +102,7 @@ You can find the latest official version at https://vicon.com/downloads/utilitie
 
 
 ## To Do's:
-- ISSUE: BUILD FAILS on Windows!!!! Probably due to error with white spaces in path when trying to reference to .lib file
+- WINDOWS ISSUE: It compiles on Windows, but the `ViconDataStreamSDK_CPP.dll` and `ViconDataStreamSDK_CPP.lib` are installed/copied to the wrong path! They should be under `(venv)/Lib/site-packages/pyvicon_datastream` but they end up in the venv's root folder. When moving the files manually to the correct location, the module works.
 - Test on other Platforms: Windows
 - Clean up Makefile
 - Add examples
