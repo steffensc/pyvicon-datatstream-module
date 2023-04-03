@@ -11,6 +11,7 @@ This module is currently still in development. So far I only managed to run and 
 - **ARM**: M1-Pro MacBook Pro with macOS Ventura 13.2.1
 - **ARM**: RaspBerry Pi 4 (4 GB) with Ubuntu 22
 - **x86**: some Laptop with Ubuntu 20
+- **x86**: Windows 10 -> `ViconDataStreamSDK_CPP.dll` and `ViconDataStreamSDK_CPP.lib` are installed/copied to the wrong path! Move them manually to module's folder `(venv)/Lib/site-packages/pyvicon_datastream`
 
 
 ### Background information
