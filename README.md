@@ -11,7 +11,7 @@ This module is currently still in development. So far I only managed to run and 
 - **ARM**: M1-Pro MacBook Pro with macOS Ventura 13.2.1
 - **ARM**: RaspBerry Pi 4 (4 GB) with Ubuntu 22
 - **x86**: some Laptop with Ubuntu 20
-- **x86**: Windows 10 -> `ViconDataStreamSDK_CPP.dll` and `ViconDataStreamSDK_CPP.lib` are installed/copied to the wrong path! Move them manually to module's folder `(venv)/Lib/site-packages/pyvicon_datastream`
+- **x86**: Windows 10 -> `ViconDataStreamSDK_CPP.dll` and `ViconDataStreamSDK_CPP.lib` are installed/copied to the wrong path! See section "*Common issues when compiling / building the module*".
 
 
 ### Background information
@@ -63,6 +63,10 @@ while(True):
 - fatal error: Python.h: No such file or directory
   - `sudo apt install python3-dev`
 
+- **Windows:** ImportError: DLL load failed while importing _pyvicon_datastream_wrapper: Das angegebene Modul wurde nicht gefunden.
+  Cause: `ViconDataStreamSDK_CPP.dll` and `ViconDataStreamSDK_CPP.lib` are installed/copied to the wrong path! Move them manually to module's folder:
+  -  `(venv)/bin/ViconDataStreamSDK_CPP.dll` => `(venv)/Lib/site-packages/pyvicon_datastream/Lib/ViconDataStreamSDK_CPP.dll`
+  - `(venv)/Lib/ViconDataStreamSDK_CPP.lib` => `(venv)/Lib/site-packages/pyvicon_datastream/Lib/ViconDataStreamSDK_CPP.lib` (create a folder `Lib` inside `pyvicon_datastream`)
 
 
 ### The module ist available on PyPI!
