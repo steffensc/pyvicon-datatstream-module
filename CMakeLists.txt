@@ -145,18 +145,18 @@ target_link_libraries(ViconDataStreamSDK_CPP PRIVATE
 #
 # Installing the objects in the package provides encapsulation and will become
 # important later for binary redistribution reasons.
-if(WIN32)
+if(WIN32) # This ist still not working properly on Windows
   install(
     TARGETS ViconDataStreamSDK_CPP
     EXPORT ViconDataStreamSDK_CPPTargets
     LIBRARY DESTINATION ${PYTHON_SITE}/pyvicon_datastream/${CMAKE_INSTALL_LIBDIR} # Windows needs prefix-path to the module folder insite site-packages otherwise lib files end up inthe root of the venv
   )
 else()
-  #install(
-  #  TARGETS ViconDataStreamSDK_CPP
-  #  EXPORT ViconDataStreamSDK_CPPTargets
-  #  LIBRARY DESTINATION pyvicon_datastream/${CMAKE_INSTALL_LIBDIR}
-  #)
+  install(
+    TARGETS ViconDataStreamSDK_CPP
+    EXPORT ViconDataStreamSDK_CPPTargets
+    LIBRARY DESTINATION pyvicon_datastream/${CMAKE_INSTALL_LIBDIR}
+  )
 endif()
 
 
