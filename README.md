@@ -65,7 +65,7 @@ while(True):
 
 - **Windows:** ImportError: DLL load failed while importing _pyvicon_datastream_wrapper: Das angegebene Modul wurde nicht gefunden.
   Cause: `ViconDataStreamSDK_CPP.dll` and `ViconDataStreamSDK_CPP.lib` are installed/copied to the wrong path! Move them manually to module's folder:
-  -  `(venv)/bin/ViconDataStreamSDK_CPP.dll` => `(venv)/Lib/site-packages/pyvicon_datastream/Lib/ViconDataStreamSDK_CPP.dll`
+  - `(venv)/bin/ViconDataStreamSDK_CPP.dll` => `(venv)/Lib/site-packages/pyvicon_datastream/ViconDataStreamSDK_CPP.dll`
   - `(venv)/Lib/ViconDataStreamSDK_CPP.lib` => `(venv)/Lib/site-packages/pyvicon_datastream/Lib/ViconDataStreamSDK_CPP.lib` (create a folder `Lib` inside `pyvicon_datastream`)
 
 
