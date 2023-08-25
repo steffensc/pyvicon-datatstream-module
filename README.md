@@ -2,6 +2,8 @@
 [![PyPI Downloads](https://img.shields.io/pypi/dm/pyvicon-datastream.svg?label=PyPI%20downloads)](
 https://pypi.org/project/pyvicon-datastream/)
 
+[![pyvicon-datastream](/advisor/python/pyvicon-datastream/badge.svg)](/advisor/python/pyvicon-datastream)
+
 
 This module provides a **platform independent** python 3 wrapper implementation over the Vicon Datastream SDK.
 
