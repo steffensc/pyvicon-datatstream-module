@@ -24,7 +24,7 @@ This module ships with all that nescessary library sources and does the system s
 
 ## Usage
 ### pyvicon_datastream
-```
+```python
 import pyvicon_datastream as pv
 
 VICON_TRACKER_IP = "10.0.108.3"
@@ -40,7 +40,7 @@ else:
 ```
 
 ### Tools / ObjectTracker
-```
+```python
 from pyvicon_datastream import tools
 
 VICON_TRACKER_IP = "10.0.108.3"
